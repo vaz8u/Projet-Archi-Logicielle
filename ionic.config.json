@@ -1,0 +1,7 @@
+{
+  "name": "nevergonnabe2late",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
