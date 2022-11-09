@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Modifier {{alarme.nom}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button
+    [routerLink]='"/alarmes"'
+  ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+     <ion-item>
+    <ion-label>Nom :</ion-label>
+    <ion-input [(ngModel)]="alarme.nom"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Emploi du temps</ion-label>
+    <ion-select></ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Jour(s)</ion-label>
+    <ion-select [multiple]="true">
+      <ion-select-option>
+        Lundi
+      </ion-select-option>
+      <ion-select-option>
+        Mardi
+      </ion-select-option>
+      <ion-select-option>
+        Mercredi
+      </ion-select-option>
+      <ion-select-option>
+        Jeudi
+      </ion-select-option>
+      <ion-select-option>
+        Vendredi
+      </ion-select-option>
+      <ion-select-option>
+        Samedi
+      </ion-select-option>
+      <ion-select-option>
+        Dimanche
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Temps pour se reveiller</ion-label>
+    <ion-input type="number" placeholder="0" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Temps pour arriver</ion-label>
+    <ion-input type="number" placeholder="0"></ion-input>
+  </ion-item>
+  <ion-item>
+  <ion-list>
+    <ion-label>Lieu de départ</ion-label>
+    <ion-item>
+      <ion-label>Emplacement actuel</ion-label>
+      <ion-toggle slot="end" (onclick)="emplacement=!emplacement"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Emplacement personnalisé</ion-label>
+      <ion-select (disabled)="emplacement" ></ion-select>
+    </ion-item>
+  </ion-list>
+</ion-item>
+  <ion-item>
+    <ion-label>Lieu de travail</ion-label>
+    <ion-select ></ion-select>
+  </ion-item>
+    <ion-button onclick="calculer()">Calculer heure</ion-button>
+    <ion-button style="float:right">Régler heure</ion-button>
+</ion-content>
