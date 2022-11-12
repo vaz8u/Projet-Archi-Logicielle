@@ -15,7 +15,7 @@
       <p>{{alarme.heure}}</p>
     </ion-label>
     <ion-label style="float:right">
-      <ion-button [routerLink]="[modifLien(alarme.nom)]">
+      <ion-button [routerLink]="[modifier+alarme.id]">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
       <ion-button (click)="supprimer(alarme)">

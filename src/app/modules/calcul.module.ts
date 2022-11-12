@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlarmeModule } from '../alarme/alarme.module';
-
-
+import { AlarmeModule } from './alarme.module';
 
 @NgModule({
   declarations: [],
@@ -10,13 +8,14 @@ import { AlarmeModule } from '../alarme/alarme.module';
     CommonModule
   ]
 })
+
 export class CalculModule {
   public alarme: any;
   public tempsTrajet: number;
 
-//Calcul de l’heure de l’alarme
+// Calcul de l’heure de l’alarme
 // = heure début du cours - (temps de trajet + temps pour réveil + temps d'arrivée)
-  constructor(private alarm: any) {
+  constructor(private alarm: AlarmeModule) {
     this.alarme = alarm;
   }
 

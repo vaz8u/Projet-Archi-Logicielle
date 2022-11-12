@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Emplois du Temps </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngFor="let temp of temps">
+    <ion-label>
+      <h1>{{temp.heures}}:{{temp.minutes}}
+      <ion-button style="float:right" (click)="supprimer_heure(temp)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button></h1>
+    </ion-label>
+  </ion-item>
+
+  <ion-button (click)="ajouter_edt()">
+    Ajouter un emploi du temps
+ </ion-button>
+
+ <ion-button id="heure">
+  Ajouter une heure de début de travail
+</ion-button>
+<ion-popover trigger="heure">
+  <ng-template>
+    <ion-input type="number" [(ngModel)]="heures" placeholder="00" >Heures</ion-input>
+    <ion-input type="number" [(ngModel)]="minutes" placeholder="00" >Minutes</ion-input>
+    <button (click)="ajouter_heure()">Valider</button>
+  </ng-template>
+</ion-popover>
+
+</ion-content>

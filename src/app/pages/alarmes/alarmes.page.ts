@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlarmeModule } from '../alarme/alarme.module';
+import { AlarmeModule } from '../../modules/alarme.module';
 @Component({
   selector: 'app-alarmes',
   templateUrl: './alarmes.page.html',
@@ -7,12 +7,13 @@ import { AlarmeModule } from '../alarme/alarme.module';
 })
 export class AlarmesPage implements OnInit {
   public alarme = new AlarmeModule();
+  public modifier = '/modifier/';
 
   constructor() {
    }
 
   ngOnInit() {
-    this.alarme.initAlarme();
+     this.alarme.initAlarme();
   }
 
   supprimer(alarm){
@@ -25,10 +26,6 @@ export class AlarmesPage implements OnInit {
 
   allumer(alarm){
     alarm.alume = !alarm.alume;
-  }
-
-  modifLien(nom){
-    return '/modifier/' + nom;
   }
 
   ajouter(){

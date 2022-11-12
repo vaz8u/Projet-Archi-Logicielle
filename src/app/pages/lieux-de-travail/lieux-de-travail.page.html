@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Lieux de travail </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngFor="let lieu of lieux">
+    <ion-label>
+      <h1>{{lieu.nom}}
+      <ion-button style="float:right" (click)="supprimer_lieu(lieu)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button></h1>
+      <h2>{{lieu.rue}} {{lieu.nrue}}</h2>
+      <h2>{{lieu.ville}}</h2>
+    </ion-label>
+  </ion-item>
+
+ <ion-button id="lieu">
+  Ajouter un lieux
+</ion-button>
+<ion-popover trigger="lieu">
+  <ng-template>
+    <ion-input type="text" [(ngModel)]="nom" placeholder="..." >Nom</ion-input>
+    <ion-input type="text" [(ngModel)]="rue" placeholder="..." >Rue</ion-input>
+    <ion-input type="text" [(ngModel)]="nrue" placeholder="..." >N°Rue</ion-input>
+    <ion-input type="text" [(ngModel)]="ville" placeholder="..." >Ville</ion-input>
+    <button (click)="ajouter_lieu()">Valider</button>
+  </ng-template>
+</ion-popover>
+
+<ion-button>Ajouter sur une carte</ion-button>
+
+</ion-content>
