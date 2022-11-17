@@ -13,6 +13,8 @@ const storage = appInjector.get(Storage);
   ]
 })
 export class AlarmeModule {
+  private static instance: AlarmeModule;
+
   public id = 0;
   public alarmes: {
     heure: string;
@@ -27,6 +29,16 @@ export class AlarmeModule {
     lieuDepart: string;
     nom: string;
   }[] = [];
+
+  private constructor() { }
+
+  public static getInstance(): AlarmeModule {
+    if (!AlarmeModule.instance) {
+      AlarmeModule.instance = new AlarmeModule();
+    }
+
+    return AlarmeModule.instance;
+  }
 
   public toggleAlarme(id: number) {
     this.getAlarme(id).allume = !this.getAlarme(id).allume;

@@ -12,7 +12,7 @@ const storage = appInjector.get(Storage);
   styleUrls: ['./alarmes.page.scss'],
 })
 export class AlarmesPage implements OnInit {
-  public alarmeModule = new AlarmeModule();
+  public alarmeModule = AlarmeModule.getInstance();
   public modifier = '/modifier/';
 
   async ngOnInit() {
