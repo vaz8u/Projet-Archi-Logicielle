@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {appInjector} from '../../app.module';
 import { AlarmeModule } from '../../modules/alarme.module';
+import {ALARMES} from '../../../data/alarmes';
+import {Storage} from '@ionic/storage-angular';
+
+const storage = appInjector.get(Storage);
+
 @Component({
   selector: 'app-alarmes',
   templateUrl: './alarmes.page.html',
@@ -12,8 +18,9 @@ export class AlarmesPage implements OnInit {
   constructor() {
    }
 
-  ngOnInit() {
-     this.alarme.initAlarme();
+  async ngOnInit() {
+    await storage.create();
+    this.alarme.initAlarme();
   }
 
   supprimer(alarm){
