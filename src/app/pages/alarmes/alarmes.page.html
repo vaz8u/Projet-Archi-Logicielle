@@ -9,7 +9,7 @@
 
 <ion-content>
 <ion-list>
-  <ion-item *ngFor="let alarme of alarme.alarmes">
+  <ion-item *ngFor="let alarme of alarmeModule.alarmes">
     <ion-label>
       <h2>{{alarme.nom}}</h2>
       <p>{{alarme.heure}}</p>
@@ -21,7 +21,7 @@
       <ion-button (click)="supprimer(alarme)">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
-      <ion-toggle slot="end" [checked]=alarme.allume (ionchange)="allumer(alarme)"></ion-toggle>
+      <ion-toggle slot="end" [checked]=alarme.allume (click)="allumer(alarme)"></ion-toggle>
     </ion-label>
   </ion-item>
   <ion-button (click)="ajouter()">

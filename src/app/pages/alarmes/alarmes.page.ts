@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {appInjector} from '../../app.module';
-import { AlarmeModule } from '../../modules/alarme.module';
+import {AlarmeModule} from '../../modules/alarme.module';
 import {ALARMES} from '../../../data/alarmes';
 import {Storage} from '@ionic/storage-angular';
 
@@ -12,31 +12,26 @@ const storage = appInjector.get(Storage);
   styleUrls: ['./alarmes.page.scss'],
 })
 export class AlarmesPage implements OnInit {
-  public alarme = new AlarmeModule();
+  public alarmeModule = new AlarmeModule();
   public modifier = '/modifier/';
-
-  constructor() {
-   }
 
   async ngOnInit() {
     await storage.create();
-    this.alarme.initAlarme();
+    this.alarmeModule.initAlarme();
   }
 
-  supprimer(alarm){
-    this.alarme.alarmes.forEach((element, index) => {
-      if(element === alarm){
-        this.alarme.alarmes.splice(index, 1);
-      }
-    });
+  supprimer(alarm) {
+    this.alarmeModule.removeAlarme(alarm.id);
   }
 
-  allumer(alarm){
-    alarm.alume = !alarm.alume;
+  allumer(alarm) {
+    this.alarmeModule.toggleAlarme(alarm.id);
+    console.log('etat de l\'alarme :', alarm.allume);
+    console.log('id de l\'alarme :', alarm.id);
   }
 
-  ajouter(){
-    this.alarme.addAlarme(this.alarme.sample());
+  ajouter() {
+    this.alarmeModule.addAlarme(this.alarmeModule.sample());
   }
 
 }

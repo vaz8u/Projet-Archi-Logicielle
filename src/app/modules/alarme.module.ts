@@ -19,32 +19,40 @@ export class AlarmeModule {
     emploiDuTemps: string;
     tempsArrivee: string;
     tempsReveil: string;
-    allume: string;
+    allume: boolean;
     jours: string;
     debutCours: string;
     lieuArrivee: string;
-    id: string;
+    id: number;
     lieuDepart: string;
     nom: string;
   }[] = [];
 
-  initAlarme() {
-    this.alarmes = ALARMES;
-    // sauvegarde des alarmes du fichier dans le stockage.
-    storage.set('mesalarmes', this.alarmes);
+  public toggleAlarme(id: number) {
+    this.getAlarme(id).allume = !this.getAlarme(id).allume;
+    this.stocker();
+  }
 
-    // chargement des alarmes dans le stockage.
+  initAlarme() {
     storage.get('mesalarmes').then((val) => {
-      console.log('Le json de mes alarmes est', val);
+      if (val.length === 0) {
+        this.alarmes = ALARMES;
+      } else {
+        this.alarmes = val;
+      }
+      this.id = this.alarmes[this.alarmes.length - 1].id + 1;
+
+      this.stocker();
     });
   }
 
   getAlarmes() {
+    this.stocker();
     return this.alarmes;
   }
 
-  getAlarme(id: string) {
-    return this.alarmes[id];
+  getAlarme(id: number) {
+    return this.alarmes.find(alarme => alarme.id === id);
   }
 
   sample() {
@@ -52,7 +60,7 @@ export class AlarmeModule {
       id: this.id++,
       nom: 'Alarme ' + this.id,
       heure: '8:00',
-      allume: 'false',
+      allume: false,
       jours: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
       emploiDuTemps: '',
       debutCours: '',
@@ -65,10 +73,25 @@ export class AlarmeModule {
 
   addAlarme(alarme: any) {
     this.alarmes.push(alarme);
+    this.stocker();
   }
 
   removeAlarme(idAlarme: number) {
-    this.alarmes.splice(idAlarme, 1);
+    console.log('id de l\'alarme a succ', idAlarme);
+    this.alarmes = this.alarmes.filter(alarme => alarme.id !== idAlarme);
+    this.stocker();
+  }
+
+  private stocker() {
+    // sauvegarde des alarmes du fichier dans le stockage.
+    storage.set('mesalarmes', this.alarmes).then(r => {
+      // chargement des alarmes dans le stockage.
+      storage.get('mesalarmes').then((val) => {
+        console.log('Les alarmes du storage sont :', val);
+      });
+      console.log('Les alarmes du json sont :', this.alarmes);
+    });
+
   }
 
 }
