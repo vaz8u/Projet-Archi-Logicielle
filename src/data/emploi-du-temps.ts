@@ -1,3 +1,3 @@
-export const emplois = {
+export const emplois = [{
 
-};
+}];

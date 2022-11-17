@@ -3,6 +3,13 @@
 import { Component, OnInit } from '@angular/core';
 import { apiLocalisation } from 'src/app/services/api/apiLocalisation';
 import { ApiTrajet } from 'src/app/services/api/apiTrajet';
+import {CommonModule} from '@angular/common';
+import {emplois} from '../../../data/emploi-du-temps';
+import {Storage} from '@ionic/storage-angular';
+import {EmploiDuTempsModule} from '../../modules/emploidutemps.module';
+import {TrajetsModule} from '../../modules/trajets.module';
+import { appInjector } from 'src/app/app.module';
+const storage = appInjector.get(Storage);
 
 @Component({
   selector: 'app-lieux-de-travail',
@@ -31,24 +38,8 @@ export class LieuxDeTravailPage implements OnInit {
     ville: string;
     }[] = [];
 
-    public trajets: {
-      depart: {
-        id: number;
-        nom: string;
-        rue: string;
-        nrue: string;
-        ville: string;
-        };
-      arrivee: {
-        id: number;
-        nom: string;
-        rue: string;
-        nrue: string;
-        ville: string;
-        };
-        temps: number;
-        distance: number;
-    }[] = [];
+    public trajets = TrajetsModule.getInstance();
+
     public depart: number;
     public arrivee: number;
 
@@ -65,7 +56,7 @@ export class LieuxDeTravailPage implements OnInit {
     const Narrivee = this.lieux[this.arrivee];
     const i = new ApiTrajet();
     await i.trajet(Ndepart, Narrivee);
-    this.trajets.push({depart:Ndepart, arrivee:Narrivee, temps:this.traffic+Math.round((i.time/100)* 100)/100, distance:Math.round((i.distance/1000)*100)/100});
+    this.trajets.ajouter_trajet(Ndepart, Narrivee, this.traffic+Math.round((i.time/100)* 100)/100, Math.round((i.distance/1000)*100)/100);
   }
 
   async ajouter_lieu2(){

@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import {NgModule} from '@angular/core';
 import {appInjector} from '../app.module';
 import {CommonModule} from '@angular/common';
-import {emplois} from '../../data/emploi-du-temps';
 import {Storage} from '@ionic/storage-angular';
 
 const storage = appInjector.get(Storage);
@@ -16,14 +15,26 @@ const storage = appInjector.get(Storage);
   ]
 })
 
-export class EmploiDuTempsModule implements OnInit {
-  private static instance: EmploiDuTempsModule;
+export class TrajetsModule implements OnInit {
+  private static instance: TrajetsModule;
 
-  public heures: number;
-  public minutes: number;
-  public temps: {
-    heures: number;
-    minutes: number;
+  public trajets: {
+    depart: {
+      id: number;
+      nom: string;
+      rue: string;
+      nrue: string;
+      ville: string;
+      };
+    arrivee: {
+      id: number;
+      nom: string;
+      rue: string;
+      nrue: string;
+      ville: string;
+      };
+      temps: number;
+      distance: number;
   }[] = [];
 
 private constructor() { }
@@ -31,18 +42,18 @@ private constructor() { }
   }
 
   init() {
-    storage.get('mesalarmes').then((val) => {
-        this.temps = val;
+    storage.get('mestrajets').then((val) => {
+        this.trajets = val;
       this.stocker();
     });
   }
 
 
-  public static getInstance(): EmploiDuTempsModule {
-    if (!EmploiDuTempsModule.instance) {
-        EmploiDuTempsModule.instance = new EmploiDuTempsModule();
+  public static getInstance(): TrajetsModule {
+    if (!TrajetsModule.instance) {
+        TrajetsModule.instance = new TrajetsModule();
     }
-    return EmploiDuTempsModule.instance;
+    return TrajetsModule.instance;
   }
 
 
@@ -51,23 +62,19 @@ private constructor() { }
     // TODO
   }
 
-  ajouter_heure(heure,minute){
-    this.temps.push({heures:heure, minutes:minute});
+  ajouter_trajet(depart_,arrivee_,heure_,minute_){
+    this.trajets.push({depart:depart_,arrivee:arrivee_, temps:heure_, distance:minute_});
     this.stocker();
   }
 
   private stocker() {
     // sauvegarde des alarmes du fichier dans le stockage.
-    storage.set('mesheures', this.temps).then(r => {
+    storage.set('mestrajets', this.trajets).then(r => {
       // chargement des alarmes dans le stockage.
-      storage.get('mesheures').then((val) => {
+      storage.get('mestrajets').then((val) => {
         console.log('Les alarmes du storage sont :', val);
       });
     });
-  }
-
-  supprimer_heure(temp: any){
-    this.temps.splice(this.temps.indexOf(temp), 1);
   }
 
 }

@@ -19,8 +19,8 @@
   </ion-item>
   <ion-item>
     <ion-label>Emploi du temps / Heure de début</ion-label>
-    <ion-select>
-      <ion-select-option *ngFor="let heure of heures" value="{{heure}}">{{heure.heures}} : {{heure.minutes}}</ion-select-option>
+    <ion-select [(ngModel)]="empl">
+      <ion-select-option *ngFor="let heure of emploiDuTemps.temps" value="{{heure}}">{{heure.heures}} : {{heure.minutes}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
@@ -51,17 +51,17 @@
   </ion-item>
   <ion-item>
     <ion-label>Temps pour se reveiller</ion-label>
-    <ion-input type="number" placeholder="0" ></ion-input>
+    <ion-input [(ngModel)]="reveil" type="number" placeholder="0" ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Temps pour arriver</ion-label>
-    <ion-input type="number" placeholder="0"></ion-input>
+    <ion-input [(ngModel)]="arriver" type="number" placeholder="0"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Trajet</ion-label>
-    <ion-select>
-      <ion-select-option *ngFor="let trajet of trajets" value="{{trajet}}">{{trajet.depart}}->{{trajet.arivee}}</ion-select-option>
+    <ion-select [(ngModel)]="traj">
+      <ion-select-option  *ngFor="let trajet of trajets.trajets" value="{{trajet}}">{{trajet.depart.nom}}->{{trajet.arrivee.nom}}</ion-select-option>
     </ion-select>
   </ion-item>
-    <ion-button onclick="calculer()">Calculer l'heure du réveil</ion-button>
+    <ion-button (click)="calculer()">Calculer l'heure du réveil</ion-button>
 </ion-content>

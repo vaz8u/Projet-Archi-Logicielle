@@ -10,16 +10,19 @@ import { AlarmeModule } from './alarme.module';
 })
 
 export class CalculModule {
-  public alarme: any;
-  public tempsTrajet: number;
-
 // Calcul de l’heure de l’alarme
 // = heure début du cours - (temps de trajet + temps pour réveil + temps d'arrivée)
-  constructor(private alarm: AlarmeModule) {
-    this.alarme = alarm;
+  constructor() {
   }
 
-  calculer(){
-    return this.alarme.debutCours-(this.tempsTrajet+this.alarme.tempsReveil+this.alarme.tempsArrivee);
+  calculer(debutCoursH: number,debutCoursM: number, tempsTrajet: number, tempsArrivee: number, tempsReveil: number) {
+    let res = (tempsTrajet+tempsReveil+tempsArrivee);
+    if (res > 60 ){
+      debutCoursH = debutCoursH - 1;
+    }
+    res = debutCoursM - (res-60);
+    console.log(res);
+    return debutCoursH+':'+ res;
+  }
  }
-}
+

@@ -40,14 +40,14 @@
   </ng-template>
 </ion-popover>
 
-  <ion-item *ngIf="trajets.length === 0">
+  <ion-item *ngIf="trajets.trajets.length === 0">
     <ion-label>
       <h2>Aucun trajets</h2>
       <p>Vous n'avez pas encore enregistré de trajets.</p>
     </ion-label>
   </ion-item>
 
-  <ion-item *ngFor="let trajet of trajets">
+  <ion-item *ngFor="let trajet of trajets.trajets">
     <ion-label>
       <p>Départ: {{trajet.depart.nom}}</p>
       <p>Arrivée: {{trajet.arrivee.nom}}</p>

@@ -17,27 +17,24 @@ const storage = appInjector.get(Storage);
 export class EmploiDuTempsPage implements OnInit {
   public heures: number;
   public minutes: number;
-  public temps: {
-    heures: number;
-    minutes: number;
-  }[] = [];
-  public tempsModule = EmploiDuTempsModule.getInstance();
-
+  public temps = EmploiDuTempsModule.getInstance();
   constructor() { }
 
-  ngOnInit() {
-  }
+  async ngOnInit() {
+    await storage.create();
+
+    }
 
   ajouter_edt(){
     // TODO
   }
 
   ajouter_heure(){
-    this.temps.push({heures:this.heures, minutes:this.minutes});
+    this.temps.ajouter_heure(this.heures, this.minutes);
   }
 
   supprimer_heure(temp: any){
-    this.temps.splice(this.temps.indexOf(temp), 1);
+    //this.temps.splice(this.temps.indexOf(temp), 1);
   }
 
 }
