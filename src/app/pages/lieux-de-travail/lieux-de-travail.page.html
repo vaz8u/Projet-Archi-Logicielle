@@ -3,12 +3,17 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title> Lieux de travail </ion-title>
+    <ion-title> Lieux et Trajets </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-item *ngIf="lieux.length === 0">
+    <ion-label>
+      <h2>Aucun lieu de travail ou de départ</h2>
+      <p>Vous n'avez pas encore enregistré de lieu.</p>
+    </ion-label>
+  </ion-item>
   <ion-item *ngFor="let lieu of lieux">
     <ion-label>
       <h1>{{lieu.nom}}
@@ -30,9 +35,41 @@
     <ion-input type="text" [(ngModel)]="nrue" placeholder="..." >N°Rue</ion-input>
     <ion-input type="text" [(ngModel)]="ville" placeholder="..." >Ville</ion-input>
     <button (click)="ajouter_lieu()">Valider</button>
+    <br/>
+    <button (click)="ajouter_lieu2()" [(disabled)]="estDemande">Ma position actuelle</button>
   </ng-template>
 </ion-popover>
 
-<ion-button>Ajouter sur une carte</ion-button>
+  <ion-item *ngIf="trajets.length === 0">
+    <ion-label>
+      <h2>Aucun trajets</h2>
+      <p>Vous n'avez pas encore enregistré de trajets.</p>
+    </ion-label>
+  </ion-item>
 
+  <ion-item *ngFor="let trajet of trajets">
+    <ion-label>
+      <p>Départ: {{trajet.depart.nom}}</p>
+      <p>Arrivée: {{trajet.arrivee.nom}}</p>
+      <p>Distance: {{trajet.distance}} km</p>
+      <p>Durée: {{trajet.temps}} min</p>
+    </ion-label>
+  </ion-item>
+  <ion-item *ngIf="lieux.length < 2 ">
+    <ion-label>
+      <h2>Pas assez de lieux</h2>
+      <p>Il faut 2 lieux ou plus pour faire un trajet.</p>
+    </ion-label>
+  </ion-item>
+  <div *ngIf="lieux.length > 1 ">
+  <ion-select [(ngModel)]="depart"  placeholder="Selectionnez le lieux de départ">
+    <ion-select-option *ngFor="let lieu of lieux" value="{{lieu.id}}">{{lieu.nom}}</ion-select-option>
+  </ion-select>
+  <ion-select [(ngModel)]="arrivee" placeholder="Selectionnez le lieux d'arrivée">
+    <ion-select-option *ngFor="let lieu of lieux" value="{{lieu.id}}">{{lieu.nom}}</ion-select-option>
+  </ion-select>
+  <ion-button id="traj" (click)="ajouter_trajet()">
+    Ajouter un trajet
+  </ion-button>
+</div>
 </ion-content>

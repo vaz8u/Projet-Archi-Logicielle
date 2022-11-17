@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlarmeModule } from '../../modules/alarme.module';
 import { CalculModule } from '../../modules/calcul.module';
+import { LieuxDeTravailPage } from '../lieux-de-travail/lieux-de-travail.page';
 @Component({
   selector: 'app-modifier',
   templateUrl: './modifier.page.html',
@@ -13,6 +14,8 @@ export class ModifierPage implements OnInit {
   public alarmeModule = AlarmeModule.getInstance();
   public calcul: any;
   public emplacement: boolean;
+  public trajets: any;
+  public heures: any;
 
   constructor(private activatedRoute: ActivatedRoute) {
   }

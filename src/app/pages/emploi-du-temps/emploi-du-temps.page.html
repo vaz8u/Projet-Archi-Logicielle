@@ -8,7 +8,13 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item *ngIf="temps.length === 0">
+    <ion-label>
+      <h2>Aucun emploi du temps</h2>
+      <p>Vous n'avez pas encore enregistré d'emploi du temps</p>
+      <p>ou d'heures de début de travail.</p>
+    </ion-label>
+  </ion-item>
   <ion-item *ngFor="let temp of temps">
     <ion-label>
       <h1>{{temp.heures}}:{{temp.minutes}}
@@ -18,7 +24,7 @@
     </ion-label>
   </ion-item>
 
-  <ion-button (click)="ajouter_edt()">
+  <ion-button disabled="true" (click)="ajouter_edt()">
     Ajouter un emploi du temps
  </ion-button>
 
