@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title> Modifier {{alarme.nom}} </ion-title>
+    <ion-title> Modifier {{alarme["nom"]}} </ion-title>
     <ion-buttons slot="end">
       <ion-back-button
     [routerLink]='"/alarmes"'
@@ -60,11 +60,11 @@
     <ion-label>Lieu de départ</ion-label>
     <ion-item>
       <ion-label>Emplacement actuel</ion-label>
-      <ion-toggle slot="end" (onclick)="emplacement=!emplacement"></ion-toggle>
+      <ion-toggle slot="end" (click)="emplacement=!emplacement"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Emplacement personnalisé</ion-label>
-      <ion-select (disabled)="emplacement" ></ion-select>
+      <ion-select (ionDismiss)="emplacement" ></ion-select>
     </ion-item>
   </ion-list>
 </ion-item>

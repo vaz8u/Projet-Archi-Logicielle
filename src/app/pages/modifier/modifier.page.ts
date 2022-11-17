@@ -18,10 +18,16 @@ export class ModifierPage implements OnInit {
   }
 
   ngOnInit() {
+    const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 10);
+    console.log('activatedRoute :', this.activatedRoute);
+    console.log('snapshot :', this.activatedRoute.snapshot);
+    console.log('paramMap :', this.activatedRoute.snapshot.paramMap);
+    console.log('alarme a modif :', id);
+
     // TODO: récupérer l'alarme à modifier
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    /*const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.alarme = this.alarmes.getAlarme(Number(id));
-    this.calcul = new CalculModule(this.alarme);
+    this.calcul = new CalculModule(this.alarme);*/
   }
 
     // TODO: ajouter la fonction pour modifier l'alarme
