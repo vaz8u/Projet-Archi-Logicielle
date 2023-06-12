@@ -60,7 +60,7 @@
   <ion-item>
     <ion-label>Trajet</ion-label>
     <ion-select [(ngModel)]="traj">
-      <ion-select-option  *ngFor="let trajet of trajets.trajets" value="{{trajet}}">{{trajet.depart.nom}}->{{trajet.arrivee.nom}}</ion-select-option>
+      <ion-select-option  *ngFor="let trajet of trajets.trajets" value="{{trajet}}">{{trajet.depart.nom}} <ion-icon name="arrow-forward-outline"></ion-icon> {{trajet.arrivee.nom}}</ion-select-option>
     </ion-select>
   </ion-item>
     <ion-button (click)="calculer()">Calculer l'heure du réveil</ion-button>
